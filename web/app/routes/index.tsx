@@ -1,3 +1,4 @@
+import { Center, Heading, Image, VStack } from "@chakra-ui/react";
 import { useLoaderData } from "@remix-run/react";
 import api from "~/services/api";
 
@@ -15,10 +16,15 @@ export default function Index() {
   const pools: PoolType = useLoaderData();
 
   return (
-    <div>
-      <img src="/assets/nlwCopa.svg" alt="Logotipo da aplicação NLW Copa em amarelo" />
-      <h1>NLW Copa 2022</h1>
-      count: {pools.count}
-    </div>
+    <Center flex={1} bg="black" h="full">
+      <VStack>
+        <Image
+          src="/assets/nlwCopa.svg"
+          alt="Logotipo da aplicação NLW Copa em amarelo"
+        />
+        <Heading>NLW Copa 2022</Heading>
+        count: {pools.count}
+      </VStack>
+    </Center>
   );
 }
