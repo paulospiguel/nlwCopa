@@ -1,4 +1,11 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
+import {
+  ChakraProvider,
+  //ColorModeScript,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { withEmotionCache } from "@emotion/react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
@@ -8,8 +15,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from "@remix-run/react";
-import { useContext, useEffect } from "react";
 
 import { ServerStyleContext, ClientStyleContext } from "./context";
 import { THEME } from "./styles/theme";
@@ -50,7 +57,7 @@ export default function App() {
         </Document>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
+        {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
   );
@@ -91,10 +98,64 @@ const Document = withEmotionCache(
         <body>
           {children}
           <ScrollRestoration />
+          {/* <ColorModeScript initialColorMode={THEME.config.initialColorMode} /> */}
           <Scripts />
-          <LiveReload />
+          {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
         </body>
       </html>
     );
   }
 );
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  console.error(error);
+  return (
+    <Document>
+      <VStack h="100vh" justify="center">
+        <Heading>There was an error</Heading>
+        <Text>{error.message}</Text>
+        <hr />
+        <Text>
+          Hey, developer, you should replace this with what you want your users
+          to see.
+        </Text>
+      </VStack>
+    </Document>
+  );
+}
+
+export function CatchBoundary() {
+  let caught = useCatch();
+  let message;
+  switch (caught.status) {
+    case 401:
+      message = (
+        <Text>
+          Oops! Looks like you tried to visit a page that you do not have access
+          to.
+        </Text>
+      );
+      break;
+    case 404:
+      message = (
+        <Text>
+          Oops! Looks like you tried to visit a page that does not exist.
+        </Text>
+      );
+      break;
+
+    default:
+      throw new Error(caught.data || caught.statusText);
+  }
+
+  return (
+    <Document>
+      <VStack h="100vh" justify="center">
+        <Heading>
+          {caught.status}: {caught.statusText}
+        </Heading>
+        {message}
+      </VStack>
+    </Document>
+  );
+}

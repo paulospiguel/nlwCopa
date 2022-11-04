@@ -1,9 +1,9 @@
 # NLWCopa
 
 - Web
-    - [Remixrun](https://remix.run/)
-    - [Typescript](https://www.typescriptlang.org/)
-    - [ChakraUI](https://chakra-ui.com/)
+  - [Remixrun](https://remix.run/)
+  - [Typescript](https://www.typescriptlang.org/)
+  - [ChakraUI](https://chakra-ui.com/)
 - Mobile
   - [React Native](https://reactnative.dev/)
   - [Expo](https://expo.dev/)
@@ -13,6 +13,7 @@
   - [NodeJS](https://nodejs.org)
   - [Typescript](https://www.typescriptlang.org/)
   - [Fastify](https://www.fastify.io/)
+  - [Prisma](https://www.prisma.io/)
 
 
 ## Features

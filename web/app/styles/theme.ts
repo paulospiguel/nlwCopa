@@ -1,7 +1,12 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, theme } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 
 export const THEME = extendTheme({
+  ...theme,
+  config: {
+    useSystemColorMode: false,
+    initialColorMode: "dark",
+  },
   colors: {
     gray: {
       950: "#09090A",
@@ -24,9 +29,9 @@ export const THEME = extendTheme({
     white: "#FFFFFF",
   },
   fonts: {
-    heading: "'Roboto_700Bold', sans-serif;",
-    body: "'Roboto_400Regular', sans-serif;",
-    medium: "'Roboto_500Medium', sans-serif;",
+    heading: "'Roboto_700Bold', sans-serif",
+    body: "'Roboto_400Regular', sans-serif",
+    medium: "'Roboto_500Medium', sans-serif",
   },
   fontSizes: {
     xs: 12,
@@ -43,8 +48,13 @@ export const THEME = extendTheme({
       "html, body": {
         height: "full",
         width: "full",
-        color: mode("gray.800", "whiteAlpha.900")(props),
+        color: "whiteAlpha.900", //mode("gray.800", "whiteAlpha.900")(props),
         lineHeight: "tall",
+        // bg: "gray.900",
+        fontFamily: {
+          sans: "Roboto, sans-serif",
+        },
+        webkitFontSmoothing: "antialiased",
       },
     }),
   },
