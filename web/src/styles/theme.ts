@@ -50,7 +50,7 @@ export const THEME = extendTheme({
         width: "full",
         color: "whiteAlpha.900", //mode("gray.800", "whiteAlpha.900")(props),
         lineHeight: "tall",
-        // bg: "gray.900",
+        bg: "gray.900",
         fontFamily: {
           sans: "Roboto, sans-serif",
         },
